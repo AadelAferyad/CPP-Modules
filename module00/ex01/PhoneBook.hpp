@@ -1,22 +1,18 @@
 #ifndef PHONBOOK_H
 #define PHONBOOK_H
 
-#include <string>
 #include "Contact.hpp"
 
-class PhoneBook : public Contact
+class PhoneBook 
 {
 	private:
 		Contact contacts[8]; 
+		static int contact_counter;
 	public:
-		void add(std::string fname, std::string lname, std::string nickname, std::string phone, std::string scret)
-		{
-
-			if (GetCounter() >= 8)
-				contacts[7].SetAll(fname, lname, nickname, phone, scret);
-			else
-				contacts[GetCounter()].SetAll(fname, lname, nickname, phone, scret);
-		}
+		static int GetCounter();
+		void	IncCounter();
+		Contact GetContacts(int index);
+		void SetContact(std::string fname, std::string lname, std::string nname, std::string phone, std::string secret);
 };
 
 #endif
