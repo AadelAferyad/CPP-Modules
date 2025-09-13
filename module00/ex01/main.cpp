@@ -33,7 +33,7 @@ void	SearchInPhoneBook(PhoneBook& phone)
 	int	i;
 	i = 0;
 
-	while (i < 8)
+	while (i < phone.GetCounter())
 	{
 		cn = phone.GetContacts(i);
 		std::cout << "First name: " << cn.GetFirstName() << " | " << "Last name: "<<cn.GetLastName()<< " | "<< "Nickname: " << cn.GetNickName() << " | " <<"Phone number: "<<cn.GetPhoneNumber()<< " | " << "Darkest secrect: "<<cn.GetSecret();
