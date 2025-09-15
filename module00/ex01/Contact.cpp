@@ -71,10 +71,19 @@ Contact PhoneBook::GetContacts(int index)
 void	PhoneBook::SetContact(std::string fname, std::string lname, std::string nname, std::string phone, std::string secret)
 {
 	int	i;
+	Contact cn;
 
 	i = this->contact_counter;
-	if (i >= 7)
-		i = 7;
+	if (i >= 8)
+	{
+		cn = this->GetContacts(7);
+		cn.SetFirstName(fname);
+                cn.SetLasttName(lname);
+		cn.SetNickName(nname); 
+                cn.SetPhone(phone); 
+                cn.SetSecret(secret); 
+		return ;
+	}
 	this->contacts[i].SetFirstName(fname); 
 	this->contacts[i].SetLasttName(lname); 
 	this->contacts[i].SetNickName(nname); 

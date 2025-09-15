@@ -1,6 +1,7 @@
 #include "PhoneBook.hpp"
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 void	AddToPhonBook(PhoneBook& phone)
 {
@@ -27,19 +28,52 @@ void	AddToPhonBook(PhoneBook& phone)
 	phone.SetContact(name, lname, nname, phonen, secret);
 }
 
+std::string	truncate(std::string str)
+{
+	if (str.length() >= 10)
+		return (str.substr(0, 9) + ".");
+	return (str);
+}
+
+void	display(PhoneBook& phone, int i)
+{
+	Contact	cn;
+
+	cn = phone.GetContacts(i);
+	std::cout << "First Name: " << cn.GetFirstName() << "\n";
+	std::cout << "Last Name : " << cn.GetLastName() << "\n";
+	std::cout << "NickName  : " << cn.GetNickName() << "\n";
+	std::cout << "Phone     : " << cn.GetPhoneNumber() << "\n";
+	std::cout << "Secret    : " << cn.GetSecret() << "\n";
+}
+
 void	SearchInPhoneBook(PhoneBook& phone)
 {
 	Contact cn;
 	int	i;
+	int	len;
 	i = 0;
 
+	std::cout << "Index" << std::setw(5) << " | " << "First Name" << " | " << "Last Name " << " | " << " Nickname " << " | \n";
 	while (i < phone.GetCounter())
 	{
 		cn = phone.GetContacts(i);
-		std::cout << "First name: " << cn.GetFirstName() << " | " << "Last name: "<<cn.GetLastName()<< " | "<< "Nickname: " << cn.GetNickName() << " | " <<"Phone number: "<<cn.GetPhoneNumber()<< " | " << "Darkest secrect: "<<cn.GetSecret();
+		std::cout << std::setw(5) << i + 1 << std::setw(5)<< " | ";
+		len = 13 - cn.GetFirstName().length();
+		std::cout << truncate(cn.GetFirstName()) << std::setw(len < 0 ? 0 : len) << " | ";
+		len = 13 - cn.GetLastName().length();
+		std::cout << truncate(cn.GetLastName()) << std::setw(len < 0 ? 0 : len) << " | ";
+		len = 13 - cn.GetNickName().length();
+		std::cout << truncate(cn.GetNickName()) << std::setw(len < 0 ? 0 : len) << " | ";
 		std::cout<< "\n";
 		i++;
 	}
+	std::cout << "Chose the contact index: ";
+	std::cin >> i;
+	if (i >= 9 || i > phone.GetCounter())
+		std::cout << "The index is out of range Please chose between 1 to 8";
+	else
+		display(phone, i - 1);
 }
 
 int	main(void)
