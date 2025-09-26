@@ -55,7 +55,7 @@ void	SearchInPhoneBook(PhoneBook& phone)
 	i = 0;
 
 	std::cout << "Index" << std::setw(5) << " | " << "First Name" << " | " << "Last Name " << " | " << " Nickname " << " | \n";
-	while (i < phone.GetCounter())
+	while (i < phone.GetCounter() && i < 8)
 	{
 		cn = phone.GetContacts(i);
 		std::cout << std::setw(5) << i + 1 << std::setw(5)<< " | ";
@@ -71,7 +71,7 @@ void	SearchInPhoneBook(PhoneBook& phone)
 	std::cout << "Chose the contact index: ";
 	std::cin >> i;
 	if (i >= 9 || i > phone.GetCounter())
-		std::cout << "The index is out of range Please chose between 1 to 8";
+		std::cout << "The index is out of range Please chose between 1 to 8\n";
 	else
 		display(phone, i - 1);
 }
@@ -84,6 +84,7 @@ int	main(void)
 	
 	while (1)
 	{
+		std::cout << "Chose from the following the instructions : ADD | SEARCH | EXIT\n";
 		std::cin >> inputs;
 		if (!inputs.compare("ADD"))
 			AddToPhonBook(phone);

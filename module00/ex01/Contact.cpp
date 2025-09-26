@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include <iostream>
 
 int PhoneBook::contact_counter = 0;
 
@@ -75,15 +76,7 @@ void	PhoneBook::SetContact(std::string fname, std::string lname, std::string nna
 
 	i = this->contact_counter;
 	if (i >= 8)
-	{
-		cn = this->GetContacts(7);
-		cn.SetFirstName(fname);
-                cn.SetLasttName(lname);
-		cn.SetNickName(nname); 
-                cn.SetPhone(phone); 
-                cn.SetSecret(secret); 
-		return ;
-	}
+		i = 7;
 	this->contacts[i].SetFirstName(fname); 
 	this->contacts[i].SetLasttName(lname); 
 	this->contacts[i].SetNickName(nname); 
