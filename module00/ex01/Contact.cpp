@@ -76,7 +76,14 @@ void	PhoneBook::SetContact(std::string fname, std::string lname, std::string nna
 
 	i = this->contact_counter;
 	if (i >= 8)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			if (j + 1 < 8)
+				this->contacts[j] = this->contacts[j + 1];
+		}
 		i = 7;
+	}
 	this->contacts[i].SetFirstName(fname); 
 	this->contacts[i].SetLasttName(lname); 
 	this->contacts[i].SetNickName(nname); 

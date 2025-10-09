@@ -27,20 +27,6 @@ class Contact
 		std::string GetSecret();
 		void SetSecret(std::string secret);
 
-
-		/*Contact() : first_name(""), last_name(""), nickname(""), phone_number(""), secret("") {}*/
-		/**/
-		/*Contact(std::string fname, std::string lname, std::string nname, std::string phone, std::string scrt) :*/
-		/*	first_name(fname), last_name(lname), nickname(nname), phone_number(phone), secret(scrt) {this->contact_counter++;}*/
-		/*void	SetAll(std::string fname, std::string lname, std::string nname, std::string phone, std::string scrt)*/
-		/*{*/
-		/*	first_name = fname;*/
-		/*	last_name = lname;*/
-		/*	nickname = nname;*/
-		/*	phone_number = phone;*/
-		/*	secret = scrt;*/
-		/*	this->contact_counter++;*/
-		/*}*/
 };
 
 #endif

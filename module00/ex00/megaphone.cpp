@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <cctype>
 
 void	PrintToUpper(char *str)
 {
@@ -16,10 +18,15 @@ void	PrintToUpper(char *str)
 
 int	main(int ac, char **av)
 {
+	std::string	str;
 	if (ac > 1)
 	{
 		for (int i = 1; i < ac; i++)
-			PrintToUpper(av[i]);
+		{
+			str = av[i];
+			for (int j = 0; str[j]; j++)
+				std::cout << (char) toupper(str[j]);
+		}
 		std::cout << std::endl;
 	}
 	else

@@ -3,6 +3,17 @@
 #include <string>
 #include <iomanip>
 
+std::string	_read()
+{
+	std::string	buff;
+
+	if (!std::getline(std::cin, buff))
+		exit(1);
+	if (buff.empty())
+		return ("");
+	return (buff);
+}
+
 void	AddToPhonBook(PhoneBook& phone)
 {
 	std::string name;
@@ -12,19 +23,40 @@ void	AddToPhonBook(PhoneBook& phone)
 	std::string secret;
 
 	std::cout << "Fill the next following information\nFirst name: ";
-	std::cin >> name;
-
+	name = _read();
+	if (name.empty())
+	{
+		std::cout << "No empty fields in contact\n\n"; 
+		return ;
+	}
 	std::cout << "\nLast name: ";
-	std::cin >> lname;
-
+	lname = _read();
+	if (lname.empty())
+	{
+		std::cout << "No empty fields in contact\n\n"; 
+		return ;
+	}
 	std::cout << "\nNickname: ";
-	std::cin >> nname;
-
+	nname = _read();
+	if (nname.empty())
+	{
+		std::cout << "No empty fields in contact\n\n"; 
+		return ;
+	}
 	std::cout << "\nPhone number: ";
-	std::cin >> phonen;
-
+	phonen = _read();
+	if (phonen.empty())
+	{
+		std::cout << "No empty fields in contact\n\n"; 
+		return ;
+	}
 	std::cout << "\nDarkest secret: ";
-	std::cin >> secret;
+	secret = _read();
+	if (secret.empty())
+	{
+		std::cout << "No empty fields in contact\n\n"; 
+		return ;
+	}
 	phone.SetContact(name, lname, nname, phonen, secret);
 }
 
@@ -51,14 +83,15 @@ void	SearchInPhoneBook(PhoneBook& phone)
 {
 	Contact cn;
 	int	i;
+	std::string	input;
 	int	len;
 	i = 0;
 
-	std::cout << "Index" << std::setw(5) << " | " << "First Name" << " | " << "Last Name " << " | " << " Nickname " << " | \n";
+	std::cout << "Index" << std::setw(5) << " | " << "First Name" << " | " << "Last Name " << " | " << "Nickname  " << " | \n";
 	while (i < phone.GetCounter() && i < 8)
 	{
 		cn = phone.GetContacts(i);
-		std::cout << std::setw(5) << i + 1 << std::setw(5)<< " | ";
+		std::cout << std::right << std::setw(5) << i + 1 << std::setw(5)<< " | ";
 		len = 13 - cn.GetFirstName().length();
 		std::cout << truncate(cn.GetFirstName()) << std::setw(len < 0 ? 0 : len) << " | ";
 		len = 13 - cn.GetLastName().length();
@@ -69,8 +102,11 @@ void	SearchInPhoneBook(PhoneBook& phone)
 		i++;
 	}
 	std::cout << "Chose the contact index: ";
-	std::cin >> i;
-	if (i >= 9 || i > phone.GetCounter())
+	input = _read();
+	if (input.empty() || !isdigit(input[0]))
+		return ;
+	i = std::stoi(input, NULL);
+	if (!i || i >= 9 || i > phone.GetCounter())
 		std::cout << "The index is out of range Please chose between 1 to 8\n";
 	else
 		display(phone, i - 1);
@@ -81,11 +117,11 @@ int	main(void)
 	std::string inputs;
 	PhoneBook phone;
 
-	
 	while (1)
 	{
 		std::cout << "Chose from the following the instructions : ADD | SEARCH | EXIT\n";
-		std::cin >> inputs;
+		if (!std::getline(std::cin, inputs))
+			break ;
 		if (!inputs.compare("ADD"))
 			AddToPhonBook(phone);
 		else if (!inputs.compare("SEARCH"))
