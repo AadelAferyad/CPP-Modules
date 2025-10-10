@@ -14,6 +14,35 @@ std::string	_read()
 	return (buff);
 }
 
+int	check_digits(std::string str)
+{
+	if (str.empty())
+		return (0);
+	for (int i = 0; str[i]; i++)
+	{
+		if (!isdigit(str[i]))
+		{
+			std::cout << "This fields must be digit !\n\n";
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int	is_empty(std::string str)
+{
+	bool	is_space = true;
+
+	if (str.empty())
+		return (1);
+	for (int i = 0; str[i]; i++)
+	{
+		if (!isspace(str[i]))
+			is_space = false;
+	}
+	return (is_space == true ? 1 : 0);
+}
+
 void	AddToPhonBook(PhoneBook& phone)
 {
 	std::string name;
@@ -24,37 +53,19 @@ void	AddToPhonBook(PhoneBook& phone)
 
 	std::cout << "Fill the next following information\nFirst name: ";
 	name = _read();
-	if (name.empty())
-	{
-		std::cout << "No empty fields in contact\n\n"; 
-		return ;
-	}
 	std::cout << "\nLast name: ";
 	lname = _read();
-	if (lname.empty())
-	{
-		std::cout << "No empty fields in contact\n\n"; 
-		return ;
-	}
 	std::cout << "\nNickname: ";
 	nname = _read();
-	if (nname.empty())
-	{
-		std::cout << "No empty fields in contact\n\n"; 
-		return ;
-	}
 	std::cout << "\nPhone number: ";
 	phonen = _read();
-	if (phonen.empty())
-	{
-		std::cout << "No empty fields in contact\n\n"; 
+	if (check_digits(phonen))
 		return ;
-	}
 	std::cout << "\nDarkest secret: ";
 	secret = _read();
-	if (secret.empty())
+	if (is_empty(name) || is_empty(lname) || is_empty(nname) || is_empty(phonen) || is_empty(secret))
 	{
-		std::cout << "No empty fields in contact\n\n"; 
+		std::cout << "Invalid phone contact, fields can't be empty\n\n";
 		return ;
 	}
 	phone.SetContact(name, lname, nname, phonen, secret);
@@ -79,37 +90,47 @@ void	display(PhoneBook& phone, int i)
 	std::cout << "Secret    : " << cn.GetSecret() << "\n";
 }
 
+void	display_search()
+{
+
+	std::cout << std::right << std::setw(10) << "Index" << "|";
+	std::cout << std::right << std::setw(10) << "First Name" << "|";
+	std::cout << std::right << std::setw(10) << "Last Name" << "|";
+	std::cout << std::right << std::setw(10) << "Nickname" << "|\n";
+}
+
 void	SearchInPhoneBook(PhoneBook& phone)
 {
 	Contact cn;
-	int	i;
 	std::string	input;
-	int	len;
-	i = 0;
+	int	n;
 
-	std::cout << "Index" << std::setw(5) << " | " << "First Name" << " | " << "Last Name " << " | " << "Nickname  " << " | \n";
-	while (i < phone.GetCounter() && i < 8)
+	if (!phone.GetCounter())
+		return ;
+	display_search();
+	for (int i = 0; i < phone.GetCounter() && i < 8; i++)
 	{
 		cn = phone.GetContacts(i);
-		std::cout << std::right << std::setw(5) << i + 1 << std::setw(5)<< " | ";
-		len = 13 - cn.GetFirstName().length();
-		std::cout << truncate(cn.GetFirstName()) << std::setw(len < 0 ? 0 : len) << " | ";
-		len = 13 - cn.GetLastName().length();
-		std::cout << truncate(cn.GetLastName()) << std::setw(len < 0 ? 0 : len) << " | ";
-		len = 13 - cn.GetNickName().length();
-		std::cout << truncate(cn.GetNickName()) << std::setw(len < 0 ? 0 : len) << " | ";
+		std::cout << std::right << std::setw(10) << i + 1 << "|";
+		std::cout << std::right << std::setw(10) << truncate(cn.GetFirstName()) << "|";
+		std::cout << std::right << std::setw(10) << truncate(cn.GetLastName()) << "|";
+		std::cout << std::right << std::setw(10) << truncate(cn.GetNickName()) << "|";
 		std::cout<< "\n";
-		i++;
 	}
 	std::cout << "Chose the contact index: ";
 	input = _read();
-	if (input.empty() || !isdigit(input[0]))
+	if (is_empty(input))
+	{
+		std::cout << "Contact index can't be empty!\n\n";
 		return ;
-	i = std::stoi(input, NULL);
-	if (!i || i >= 9 || i > phone.GetCounter())
-		std::cout << "The index is out of range Please chose between 1 to 8\n";
+	}
+	if (check_digits(input))
+		return ;
+	n = std::stoi(input, NULL);
+	if (!n || n >= 9 || n > phone.GetCounter())
+		std::cout << "The index is out of range Please chose between 1 to 8\n\n";
 	else
-		display(phone, i - 1);
+		display(phone, n - 1);
 }
 
 int	main(void)
