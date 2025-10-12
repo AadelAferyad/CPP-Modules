@@ -2,13 +2,15 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <cstdlib>
+#include <sstream>
 
 std::string	_read()
 {
 	std::string	buff;
 
 	if (!std::getline(std::cin, buff))
-		exit(1);
+		exit(0);
 	if (buff.empty())
 		return ("");
 	return (buff);
@@ -126,7 +128,9 @@ void	SearchInPhoneBook(PhoneBook& phone)
 	}
 	if (check_digits(input))
 		return ;
-	n = std::stoi(input, NULL);
+	/*n = std::stoi(input, NULL);*/
+	std::stringstream p(input);
+	p >> n;
 	if (!n || n >= 9 || n > phone.GetCounter())
 		std::cout << "The index is out of range Please chose between 1 to 8\n\n";
 	else

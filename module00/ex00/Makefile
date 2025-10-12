@@ -1,13 +1,13 @@
-NAME := megaphone
-CP := c++  
-FLAGS := -std=c++98 -Wall -Wextra -Werror 
-SOURCE := megaphone.cpp
-OBJ := $(SOURCE:.cpp=.o)
+NAME = megaphone
+CXX = c++  
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror 
+SOURCE = megaphone.cpp
+OBJ = $(SOURCE:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CP) $(FLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)
@@ -15,5 +15,6 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
+re: fclean all
 
-
+.PHONY: all clean fclean re
