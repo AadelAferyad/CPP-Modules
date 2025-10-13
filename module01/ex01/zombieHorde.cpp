@@ -1,8 +1,8 @@
 #include "Zombie.hpp"
 
-Zombie* Zombie::zombieHorde( int N, std::string name )
+Zombie* zombieHorde( int N, std::string name )
 {
-	Zombie *ptr;
+	Zombie *ptr = NULL;
 
 	if (N <= 0)
 		return (NULL);

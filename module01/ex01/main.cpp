@@ -4,7 +4,9 @@ int	main(void)
 {
 	Zombie *ptr = NULL;
 
-	ptr = ptr->zombieHorde(5, "charchar");
+	ptr = zombieHorde(5, "charchar");
+	if (!ptr)
+		return (0);
 	for (int i = 0; i < 5; i++)
 	{
 		ptr[i].announce();

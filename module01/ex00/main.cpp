@@ -5,8 +5,9 @@ int	main(void)
 	Zombie c("mm");
 	Zombie *p;
 
-	p = c.newZombie("FFF");
-	c.randomChump("anotherone");
+	p = newZombie("FFF");
+	randomChump("anotherone");
+	c.announce();
 	p->announce();
 	delete p;
 	return (0);
