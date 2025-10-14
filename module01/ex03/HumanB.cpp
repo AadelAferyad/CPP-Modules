@@ -1,7 +1,9 @@
 #include "HumanB.hpp"
 #include <iostream>
 
-HumanB::HumanB(std::string name) : name(name) {}
+HumanB::HumanB(std::string name) : name(name) {
+	this->weapon = NULL;
+}
 
 void	HumanB::attack()
 {
