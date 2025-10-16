@@ -10,6 +10,10 @@ void	createOutFile(std::string fileName, std::string content)
 	if (content.empty())
 		return ;
 	std::ofstream file(fileName.c_str());
+	if (!file.is_open())
+	{
+		std::cout << "Error faild to open file : " << fileName << std::endl;
+	}
 	file << content;
 	file.close();
 }
