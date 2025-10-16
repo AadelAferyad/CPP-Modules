@@ -3,12 +3,12 @@
 
 void	Harl::debug(void)
 {
-	std::cout << "[ DEBUG ] level: love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!" << std::endl;
+	std::cout << "[ DEBUG ] level: I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!" << std::endl;
 }
 
 void	Harl::info(void)
 {
-	std::cout << "[ INFO ] level: cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!" << std::endl;
+	std::cout << "[ INFO ] level: I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!" << std::endl;
 }
 
 void	Harl::warning(void)
@@ -18,7 +18,7 @@ void	Harl::warning(void)
 
 void	Harl::error(void)
 {
-	std::cout << "[ ERROR ] level:  This is unacceptable! I want to speak to the manager now." << std::endl;
+	std::cout << "[ ERROR ] level: This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
 void	Harl::complain(std::string level)
@@ -26,11 +26,6 @@ void	Harl::complain(std::string level)
 	void (Harl::*ptr[])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
-	if (level.empty())
-	{
-		std::cout << "level can't be empty\n";
-		return ;
-	}
 	for (int i = 0; i < 4; i++)
 	{
 		if (level == levels[i])
