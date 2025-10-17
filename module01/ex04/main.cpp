@@ -1,6 +1,4 @@
 #include <string>
-//1
-//2
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -59,13 +57,13 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	fileName = av[1];
-	fileName += ".replace";
 	std::ifstream file(av[1]);
 	if (!file.is_open())
 	{
 		std::cout << "Error faild to open file : " << fileName << std::endl;
 		return (0);
 	}
+	fileName += ".replace";
 	createOutFile(fileName, replaceS1(file, av[2], av[3]));
 	file.close();
 	return (0);
