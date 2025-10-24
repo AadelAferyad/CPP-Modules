@@ -13,3 +13,14 @@ Point& Point::operator=(Point& p)
 }
 
 Point::~Point() {}
+
+Fixed Point::getX() const
+{
+	return (this->x);
+}
+
+Fixed Point::getY() const
+{
+	return (this->y);
+}
+
