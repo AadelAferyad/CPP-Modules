@@ -4,7 +4,7 @@
 int main()
 {
     std::cout << "===== Constructors =====" << std::endl;
-    ClapTrap clap("Clappy");
+    ClapTrap clap;
     FragTrap frag("Fragger");
     FragTrap copyFrag(frag);  // Copy constructor
     FragTrap assignFrag("Temp");
@@ -25,8 +25,8 @@ int main()
     frag.beRepaired(10);  // Should fail because HP = 0
 
     std::cout << std::endl << "===== Energy Depletion Test =====" << std::endl;
-    for (int i = 0; i < 105; ++i)
-        frag.attack("Target");
+    for (int i = 0; i < 101; ++i)
+        assignFrag.attack("Target");
 
     std::cout << std::endl << "===== Destructors =====" << std::endl;
     return 0;

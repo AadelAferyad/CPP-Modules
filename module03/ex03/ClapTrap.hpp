@@ -13,7 +13,7 @@ class ClapTrap
 		unsigned int	AttackDamag;
 	public:
 		ClapTrap();
-		ClapTrap(const std::string &name, unsigned int ht, unsigned int eng, unsigned int attack);
+		ClapTrap(const std::string &name, unsigned int ht = 10, unsigned int eng = 10, unsigned int attack = 0);
 		ClapTrap(const ClapTrap &clap);
 		ClapTrap& operator=(const ClapTrap &clap);
 		~ClapTrap();

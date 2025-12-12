@@ -1,33 +1,43 @@
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 #include <iostream>
 
-int main()
-{
-    std::cout << "===== Constructors =====" << std::endl;
-    ClapTrap clap;
-    FragTrap frag("Fragger");
-    FragTrap copyFrag(frag);  // Copy constructor
-    FragTrap assignFrag("Temp");
-    assignFrag = frag;        // Copy assignment operator
+int main() {
+    std::cout << "\n===== Creating Diamond A =====\n";
+    DiamondTrap A("Alpha");
 
-    std::cout << std::endl << "===== Basic Actions =====" << std::endl;
-    frag.attack("Enemy");
-    clap.takeDamage(30);
-    clap.beRepaired(20);
+    std::cout << "\n===== Testing basic identity =====\n";
+    A.whoAmI();                     // Should print both DiamondTrap name and ClapTrap name
 
-    std::cout << std::endl << "===== Special Ability =====" << std::endl;
-    frag.highFivesGuys();
+    /*std::cout << "\n===== Testing inherited attributes =====\n";*/
+    /*std::cout << "Hit: " << A.getHit() << "\n";*/
+    /*std::cout << "Energy: " << A.getEnergy() << "\n";*/
+    /*std::cout << "Attack Damage: " << A.getDamage() << "\n";*/
 
-    std::cout << std::endl << "===== Damage and Repair Test =====" << std::endl;
-    frag.takeDamage(50);
-    frag.beRepaired(40);
-    frag.takeDamage(120); // Should drop HP to 0
-    frag.beRepaired(10);  // Should fail because HP = 0
+    std::cout << "\n===== Testing ScavTrap attack =====\n";
+    A.attack("TestDummy");
 
-    std::cout << std::endl << "===== Energy Depletion Test =====" << std::endl;
-    for (int i = 0; i < 101; ++i)
-        assignFrag.attack("Target");
+    std::cout << "\n===== Testing FragTrap special ability =====\n";
+    A.highFivesGuys();
 
-    std::cout << std::endl << "===== Destructors =====" << std::endl;
-    return 0;
+    std::cout << "\n===== Testing ScavTrap special ability =====\n";
+    A.guardGate();
+
+    std::cout << "\n===== Creating Diamond B by copy constructor =====\n";
+    DiamondTrap B(A);
+
+    std::cout << "\n===== B identity =====\n";
+    B.whoAmI();
+
+    std::cout << "\n===== Creating Diamond C and assigning B to C =====\n";
+    DiamondTrap C;
+    C = B;
+
+    std::cout << "\n===== C identity after assignment =====\n";
+    C.whoAmI();
+
+    std::cout << "\n===== Attacking with C =====\n";
+    C.attack("SpareDummy");
+
+    std::cout << "\n===== End of program, destructors should fire in reverse order =====\n";
 }
+

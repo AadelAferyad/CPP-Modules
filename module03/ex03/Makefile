@@ -1,7 +1,7 @@
-NAME = FragTrap
+NAME = DiamondTrap
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SOURCE = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+SOURCE = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJ = $(SOURCE:.cpp=.o)
 
 all: $(NAME)
@@ -16,4 +16,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean ra
+.PHONY: all clean fclean re
