@@ -1,7 +1,7 @@
 NAME = animals 
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SOURCE = Animal.cpp Cat.cpp Dog.cpp main.cpp 
+SOURCE = Animal.cpp Cat.cpp Dog.cpp main.cpp Brain.cpp
 OBJ = $(SOURCE:.cpp=.o)
 
 all: $(NAME)
