@@ -13,7 +13,7 @@ Dog::Dog(const Dog &other): Animal(other)
 	std::cout << "Dog copy constructor called" << std::endl;
 }
 
-Dog Dog::operator=(const Dog &other)
+Dog& Dog::operator=(const Dog &other)
 {
 	std::cout << "Dog copy assignment constructor called" << std::endl;
 	if (this != &other)
