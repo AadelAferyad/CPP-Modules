@@ -59,7 +59,14 @@ Character::~Character()
 
 void Character::equip(AMateria* m)
 {
-
+	for (int i = 0; i < 4; i++)
+	{
+		if (this->inventory[i] == NULL)
+		{
+			this->inventory[i] = m->clone();
+			break ;
+		}
+	}
 }
 
 void unequip(int idx);
