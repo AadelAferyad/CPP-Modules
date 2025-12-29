@@ -17,7 +17,7 @@ Ice &Ice::operator=(const Ice &other)
 
 void Ice::use(ICharacter& target)
 {
-	std::cout << "Ice: \"* shoots an ice bolt at " << target.getName() << " *\"" << std::endl;
+	std::cout << "* Ice: shoots an ice bolt at " << target.getName() << " *" << std::endl;
 }
 
 AMateria* Ice::clone(void) const

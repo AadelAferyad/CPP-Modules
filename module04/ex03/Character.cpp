@@ -9,7 +9,7 @@ Character::Character() : name("defualt name")
 	}
 }
 
-Character::Character(std::string &name) : name(name)
+Character::Character(std::string const &name) : name(name)
 {
 	for (int i = 0; i < 4; i++)
 	{
@@ -59,29 +59,31 @@ Character::~Character()
 
 void Character::equip(AMateria* m)
 {
+	if (!m)
+		return ;
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->inventory[i] == NULL)
 		{
-			this->inventory[i] = m->clone();
+			this->inventory[i] = m;
 			break ;
 		}
 	}
 }
 
-void unequip(int idx);
-void use(int idx, ICharacter& target) const;
-std::string const & getName() const;
+void Character::unequip(int idx)
+{
+	if (idx < 4 && idx >= 0 && this->inventory[idx])
+		this->inventory[idx] = NULL;
+}
 
+void Character::use(int idx, ICharacter& target)
+{
+	if (idx < 4 && idx >= 0 && this->inventory[idx])
+		this->inventory[idx]->use(target);
+}
 
-
-
-
-
-
-
-
-
-
-
-
+std::string const & Character::getName() const
+{
+	return name;
+}
