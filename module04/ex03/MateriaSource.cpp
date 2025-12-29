@@ -52,6 +52,7 @@ void	MateriaSource::learnMateria(AMateria* materia)
 		}
 	}
 }
+
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
 	for (int i = 0; i < 4; i++)
