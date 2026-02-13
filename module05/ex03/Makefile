@@ -1,7 +1,7 @@
 NAME = form
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SOURCE = main.cpp AForm.cpp Bureaucrat.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SOURCE = main.cpp AForm.cpp Bureaucrat.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 OBJ = $(SOURCE:.cpp=.o)
 
 all:$(NAME)
