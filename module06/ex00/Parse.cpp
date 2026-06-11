@@ -1,6 +1,6 @@
 #include "Parse.hpp"
 
-Parse::Parse() : flag("default"){}
+Parse::Parse() : iFlag("default"), dFlag("default"), fFlag("default"), cFlag("default"){}
 Parse::Parse(const Parse &obj)
 {
 	(void) obj;
@@ -33,8 +33,14 @@ void	Parse::convert(float p)
 void	Parse::convert(double p)
 {
 	d = p;
-	f = static_cast <float>(p);
-	n = static_cast <int>(p);
+	if (d > INT_MAX || d < INT_MIN) 
+		iFlag = "impossible";
+	else
+		n = static_cast <int>(p);
+	if (d > FLT_MAX || d < FLT_MIN)
+		fFlag = "impossible";
+	else 
+		f = static_cast <float>(p);
 	c = static_cast <char>(p);
 }
 

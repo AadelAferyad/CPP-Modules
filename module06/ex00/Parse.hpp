@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cctype>
+#include <cfloat>
 #include <cstdlib>
 #include <climits>
 #include <iomanip>
@@ -11,7 +12,10 @@
 class Parse
 {
 	public:
-		std::string	flag;
+		std::string	iFlag;
+		std::string	dFlag;
+		std::string	fFlag;
+		std::string	cFlag;
 		char	c;
 		int	n;
 		float	f;

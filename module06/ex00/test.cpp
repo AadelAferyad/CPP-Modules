@@ -7,7 +7,7 @@
 bool	isInt(const char *str)
 {
 	char *end;
-	std::strtol(str, &end, 10);
+	std::strtold(str, &end);
 	return (*end == '\0');
 }
 
