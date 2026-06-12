@@ -1,7 +1,7 @@
 NAME = scalar
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SOURCE = main.cpp Scalar.cpp Parse.cpp
+SOURCE = main.cpp Scalar.cpp
 OBJ = $(SOURCE:.cpp=.o)
 
 all: $(NAME)

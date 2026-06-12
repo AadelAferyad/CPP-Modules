@@ -1,5 +1,4 @@
 #include "Scalar.hpp"
-#include "Parse.hpp"
 
 bool	isInt(const char *str)
 {
@@ -20,28 +19,15 @@ void printer_p(std::string &msg)
 	std::cout << "double: " << msg << std::endl;
 }
 
-void printer(Parse &s)
-{
-	std::cout << std::fixed << std::setprecision(1);
-	if (s.n > 0 && s.n > 32 && s.n <= 127)
-		std::cout << "char: " << s.c << std::endl;
-	else
-		std::cout << "char: " << "Non displayable" << std::endl;
-	if (s.iFlag == "impossible")
-		std::cout << "int: " << s.iFlag << std::endl;
-	else
-		std::cout << "int: " << s.n << std::endl;
-	if (s.fFlag == "impossible")
-		std::cout << "float: " << "impossible" << std::endl;
-	else
-		std::cout << "float: " << s.f << "f" << std::endl;
-	std::cout << "double: " << s.d << std::endl;
-}
-
 double	toDouble(const char *str)
 {
 	char	*end;
-	return (std::strtod(str, &end));
+	double	d;
+
+	d = std::strtod(str, &end);
+	if (*end != '\0' && str[1] == '\0')
+		d = *str;
+	return (d);
 }
 
 int	isValid(const char *str)
@@ -51,8 +37,20 @@ int	isValid(const char *str)
 	int f = 0;
 	int p = 0;
 	int i;
+	if (str[1] == '\0')
+		return (0);
 	for (i = 0; str[i]; i++)
 	{
+		if (f && str[i])
+		{
+			printer_p(a);
+			return (1);
+		}
+		if (str[i] == '.' && !std::isdigit(str[i + 1]))
+		{
+			printer_p(a);
+			return (1);
+		}
 		if (str[i] == '-' || str[i] == '+')
 		{
 			p++;
@@ -76,16 +74,11 @@ int	isValid(const char *str)
 	return (0);
 }
 
-int	checker(std::string &str, Parse &s)
+int	checker(std::string &str)
 {
 	double	dum;
-	if (str.length() == 1 && !std::isdigit(str[0]))
-	{
-		s.convert(str[0]);
-		return (0);
-	}
-	if (isValid(str.c_str()))
-		return (1);
+
+	std::cout << std::fixed << std::setprecision(1);
 	if (str == "-inff" || str == "+inff" || str == "nanf")
 	{
 		printer_p(str.erase(str.size() - 1));
@@ -96,28 +89,30 @@ int	checker(std::string &str, Parse &s)
 		printer_p(str);
 		return (1);
 	}
-	if (isInt(str.c_str()) == true)
-	{
-		dum = toDouble(str.c_str());
-		 s.convert(dum);
-	}
-	else if (str.find('.') != std::string::npos)
-	{
-		if (str.find('f') != std::string::npos)
-		{
-			s.convert(toDouble(str.c_str()));
-		}
-		else
-			s.convert(toDouble(str.c_str()));
-	}
+	dum = toDouble(str.c_str());
+	if (isValid(str.c_str()))
+		return (1);
+	if (dum > 127 || dum < -128)
+		std::cout << "char: " << "impossible" << std::endl;
+	else if (!std::isprint(static_cast<char>(dum)))
+		std::cout << "char: " << "Non displayable" << std::endl;
+	else
+		std::cout << "char: " << static_cast<char>(dum) << std::endl;
+	if (dum > INT_MAX || dum < INT_MIN)
+		std::cout << "int: " << "impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(dum) << std::endl;
+	if (dum > FLT_MAX || dum < -FLT_MAX)
+		std::cout << "float: " << "impossible" << std::endl;
+	else
+		std::cout << "float: " << static_cast<float>(dum) << "f" << std::endl;
+
+	std::cout << "double: " << dum << std::endl;
 	return (0);
 }
 
 void	ScalarConverter::convert(std::string &str)
 {
-	Parse s;
-	if (checker(str, s))
-		return ;
-	printer(s);
+	checker(str);
 }
 
