@@ -22,12 +22,51 @@ void identify(Base* p)
 	C *c = dynamic_cast<C*>(p);
 	
 	if (a != NULL)
-		s = 'a';
+		s = 'A';
 	else if (b != NULL)
-		s = 'b';
+		s = 'B';
 	else if (c != NULL)
-		s = 'c';
-	std::cout << "p: " << s << std::endl;	
+		s = 'C';
+	else
+		s = 'x';
+
+	if (s == 'x')
+		std::cout << "Object doesn't exist" << std::endl;	
+	else
+		std::cout << "p: " << s << std::endl;	
 }
 
+void identify(Base& p)
+{
+	char	s;
 
+	s = 'x';
+	try
+	{
+		A &a = dynamic_cast<A&>(p);
+		s = 'A';
+		(void) a;
+	}
+	catch (std::exception &e)
+	{}
+	try
+	{
+		B &b = dynamic_cast<B&>(p);
+		s = 'B';
+		(void) b;
+	}
+	catch (std::exception &e)
+	{}
+	try
+	{
+		C &c = dynamic_cast<C&>(p);
+		s = 'C';
+		(void) c;
+	}
+	catch (std::exception &e)
+	{}
+	if (s == 'x')
+		std::cout << "Object doesn't exist" << std::endl;	
+	else
+		std::cout << "p: " << s << std::endl;	
+}
