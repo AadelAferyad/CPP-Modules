@@ -29,11 +29,18 @@ void	Span::addNumber(const int n)
 
 int	Span::shortestSpan(void)
 {
+	int r = INT_MAX;
 	if (storage.size() < 2)
 		throw(std::out_of_range("Small span can't perform this operation"));
 	std::vector<int> dumy(storage);
 	std::sort(dumy.begin(), dumy.end());
-	return (dumy[1] - dumy[0]);
+	for (unsigned int i = 0; i <= dumy.size() - 1; i++)
+	{
+		int	temp = dumy[i + 1] - dumy[i]; 
+		if (temp > 0 && temp < r)
+			r = temp;
+	}
+	return (r);
 }
 
 int	Span::longestSpan(void)

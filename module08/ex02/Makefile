@@ -1,7 +1,7 @@
-NAME = span
+NAME = MutantStack
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SOURCE = main.cpp Span.cpp
+SOURCE = main.cpp
 OBJ = $(SOURCE:.cpp=.o)
 
 all: $(NAME)
