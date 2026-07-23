@@ -19,6 +19,7 @@ class Btc
 		void	loadDataBase();
 		void	loadInpute(char *filename);
 		const std::map<std::string, float> &getMap() const;
+		float	getCloseValue(const std::string &str) const;
 };
 
 std::ostream	&operator<<(std::ostream &out, const Btc &obj);

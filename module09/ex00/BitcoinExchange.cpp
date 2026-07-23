@@ -11,6 +11,19 @@ Btc &Btc::operator=(const Btc &obj)
 }
 Btc::~Btc() {};
 
+float	Btc::getCloseValue(const std::string &str) const
+{
+	std::map<std::string, float>::const_iterator it;
+
+	it = in.lower_bound(str);
+	if (it != in.end() && it->first == str)
+		return (it->second);
+	if (it == in.begin())
+		throw std::runtime_error("No earlier date");
+	--it;
+	return (it->second);
+}
+
 void	Btc::loadDataBase()
 {
 	std::ifstream file("data.csv");
@@ -141,7 +154,7 @@ float	checkValue(std::string &value)
 	return (n);
 }
 
-void	checkLine(std::map<std::string, float> &data, std::string &line)
+void	checkLine(std::string &line, const Btc &obj)
 {
 	std::string	date;
 	std::string	value;
@@ -157,15 +170,14 @@ void	checkLine(std::map<std::string, float> &data, std::string &line)
 		throw std::runtime_error("Error: bad inpute");
 	checkDate(date);
 	v = checkValue(value);
-	(void)data;
-	std::cout << date << sep << v << std::endl;
+	float val = obj.getCloseValue(date);
+	std::cout << date << " => " << val << " = " << val * v << std::endl;
 }
 
 void	Btc::loadInpute(char *filename)
 {
 	std::ifstream	file(filename);
 	std::string	line;
-	std::map<std::string, float> data;
 
 	if (!file.is_open())
 		throw std::runtime_error("Error: Couldn't open file");
@@ -176,7 +188,7 @@ void	Btc::loadInpute(char *filename)
 	{
 		try
 		{
-			checkLine(data, line);
+			checkLine(line, *this);
 		}
 		catch (std::exception &e)
 		{
