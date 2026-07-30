@@ -14,11 +14,10 @@ static int	checkArg(char *str)
 
 int	main(int ac, char **av)
 {
-
 	std::vector<node>	vect;
 	std::deque<node>	deq;
 	PmergeMe sort;
-	if (ac < 3)
+	if (ac < 2)
 	{
 		std::cerr << "Error: need arguments" << std::endl; 
 		return (1);
@@ -36,6 +35,7 @@ int	main(int ac, char **av)
 	catch (std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
+		return (1);
 	}
 	sort.sortVecotrContainer(vect);
 	sort.sortDequeContainer(deq);

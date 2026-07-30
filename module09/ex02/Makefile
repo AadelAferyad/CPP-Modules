@@ -1,6 +1,6 @@
 NAME = PmergeMe
 CXX = c++
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -O2
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -O3
 SOURCE = main.cpp PmergeMe.cpp
 OBJ = $(SOURCE:.cpp=.o)
 
